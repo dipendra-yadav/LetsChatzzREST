@@ -125,4 +125,6 @@ public class User extends BaseDomain {
 		this.role = role;
 	}
 
+
+
 }
