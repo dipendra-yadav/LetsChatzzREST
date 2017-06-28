@@ -22,7 +22,7 @@ public class UserTest {
 	public static void initialize() {
 
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		context.scan("com.niit.collaboration.*");
+		context.scan("com.niit.chattzz.*");
 		context.refresh();
 		user = (User) context.getBean(User.class);
 		System.out.println(user);
@@ -39,7 +39,7 @@ public class UserTest {
 		user.setId("1");
 		user.setName("dipendra");
 		user.setEmail("dipendra.techie@gmail.com");
-		
+
 		user.setMob_no("9742758996");
 		user.setPassword("1231");
 		user.setRole("ROLE_USER");
@@ -47,7 +47,7 @@ public class UserTest {
 		user.setGender("Male");
 		user.setStatus('A');
 		user.setIsOnline('y');
-		
+
 		boolean flag = userDAO.save(user);
 		Assert.assertEquals("createUserTestCase", true, flag);
 	}
