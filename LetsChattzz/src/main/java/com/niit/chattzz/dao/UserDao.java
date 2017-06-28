@@ -6,7 +6,7 @@ import com.niit.chattzz.domain.User;
 
 public interface UserDao {
 
-	public boolean save(User user);
+	public User save(User user);
 
 	public boolean update(User user);
 

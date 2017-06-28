@@ -16,8 +16,8 @@ import com.niit.chattzz.dao.UserDao;
 import com.niit.chattzz.domain.User;
 
 @SuppressWarnings("deprecation")
-@EnableTransactionManagement
 @Repository("userDAO")
+@Transactional
 public class UserDaoImpl implements UserDao {
 
 	// private static final Logger Logger =
@@ -30,17 +30,22 @@ public class UserDaoImpl implements UserDao {
 		this.sessionFactory = sessionFactory;
 	}
 
-	@Transactional
-	public boolean save(User userDetails) {
+	//save user
+	public User save(User user) {
 
 		try {
-			sessionFactory.getCurrentSession().save(userDetails);
-			return true;
-		} catch (HibernateException e) {
 
+			user.setRole("ROLE_USER");
+			user.setEnabled(true);
+			sessionFactory.getCurrentSession().save(user);
+
+		} catch (HibernateException e) {
+			System.out.println("exception occured while saving user******");
 			e.printStackTrace();
-			return false;
+
 		}
+
+		return user;
 	}
 
 	@Transactional
@@ -67,7 +72,6 @@ public class UserDaoImpl implements UserDao {
 			return false;
 		}
 	}
-	
 
 	@SuppressWarnings("unchecked")
 	@Transactional
@@ -127,22 +131,22 @@ public class UserDaoImpl implements UserDao {
 
 	@Transactional
 	public void setOffLine(String loggedInUserID) {
-		//Logger.debug("Starting of the method setOnline");
+		// Logger.debug("Starting of the method setOnline");
 		String hql = "UPDATE User SET isOnline = 'N' where userID ='" + loggedInUserID + "'";
-		//Logger.debug("hql: " + hql);
+		// Logger.debug("hql: " + hql);
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.executeUpdate();
-		//Logger.debug("Ending of the method setOnline");
+		// Logger.debug("Ending of the method setOnline");
 	}
 
 	@Transactional
 	public void setOnline(String loggedInUserID) {
-		//Logger.debug("Starting of the method setOffline");
+		// Logger.debug("Starting of the method setOffline");
 		String hql = "UPDATE User SET isOnline = 'Y' where userID = '" + loggedInUserID + "'";
-		//Logger.debug("hql: " + hql);
+		// Logger.debug("hql: " + hql);
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.executeUpdate();
-		//Logger.debug("Ending of the method setOffline");
+		// Logger.debug("Ending of the method setOffline");
 
 	}
 

@@ -26,6 +26,7 @@ public class User extends BaseDomain {
 	private String role;
 	private String Address;
 	private char status;
+	private boolean enabled;
 
 	// constructor
 	public User() {
@@ -125,6 +126,12 @@ public class User extends BaseDomain {
 		this.role = role;
 	}
 
+	public boolean isEnabled() {
+		return enabled;
+	}
 
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 
 }
