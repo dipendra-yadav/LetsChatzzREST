@@ -30,7 +30,7 @@ public class UserDaoImpl implements UserDao {
 		this.sessionFactory = sessionFactory;
 	}
 
-	//save user
+	// save user
 	public User save(User user) {
 
 		try {
@@ -107,10 +107,10 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Transactional
-	public User delete(String id) {
+	public User delete(int id) {
 		User UserToDelete = new User();
 		UserToDelete.setId(id);
-		;
+
 		sessionFactory.getCurrentSession().delete(UserToDelete);
 		return null;
 	}

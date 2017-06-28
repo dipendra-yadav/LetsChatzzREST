@@ -20,6 +20,11 @@ import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.niit.chattzz.domain.BaseDomain;
+import com.niit.chattzz.domain.Blog;
+import com.niit.chattzz.domain.BlogComment;
+import com.niit.chattzz.domain.Friend;
+import com.niit.chattzz.domain.Job;
+import com.niit.chattzz.domain.ProfilePicture;
 import com.niit.chattzz.domain.User;
 
 @Configuration
@@ -63,7 +68,8 @@ public class ApplicationContextConfiguration {
 		LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
 		sessionBuilder.addProperties(getHibernateProperties());
 		sessionBuilder.scanPackages("com.niit.chattzz.domain");
-		sessionBuilder.addAnnotatedClasses(User.class, BaseDomain.class);
+		sessionBuilder.addAnnotatedClasses(User.class, Blog.class, Job.class, Friend.class, BlogComment.class,
+				ProfilePicture.class);
 		return sessionBuilder.buildSessionFactory();
 
 	}

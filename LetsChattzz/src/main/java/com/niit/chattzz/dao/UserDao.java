@@ -16,7 +16,7 @@ public interface UserDao {
 
 	public User get(String id);
 
-	public User delete(String id);
+	public User delete(int id);
 
 	public User authenticate(String name, String Password);
 

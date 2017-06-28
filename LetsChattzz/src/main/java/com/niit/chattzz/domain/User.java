@@ -4,18 +4,21 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
 @Entity
-@Table(name = "c_user")
+@Table(name = "C_USER_DETAILS")
 @Component
 public class User extends BaseDomain {
 
 	@Id
-	private String id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
 	private String name;
 	private String email;
 	private String dob;
@@ -24,8 +27,8 @@ public class User extends BaseDomain {
 	private char isOnline;
 	private String gender;
 	private String role;
-	private String Address;
-	private char status;
+	// private String Address;
+	// private char status;
 	private boolean enabled;
 
 	// constructor
@@ -38,28 +41,13 @@ public class User extends BaseDomain {
 	}
 
 	// getters +setters
-	public String getId() {
+
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
-	}
-
-	public char getStatus() {
-		return status;
-	}
-
-	public void setStatus(char status) {
-		this.status = status;
-	}
-
-	public String getAddress() {
-		return Address;
-	}
-
-	public void setAddress(String address) {
-		Address = address;
 	}
 
 	public char getIsOnline() {
