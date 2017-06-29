@@ -125,10 +125,9 @@ public class UserDaoImpl implements UserDao {
                      
 		@SuppressWarnings("unchecked")
 		List<User> list = query.list();
-		System.out.println(list.toString());
+		System.out.println("logged in User="+list.toString());
 		if (list != null && !list.isEmpty()) {
-			System.out.println(list.get(0).toString());
-			return list.get(0);
+				return list.get(0);
 		}
 		 //sessionFactory.getCurrentSession().close();
 		return null;

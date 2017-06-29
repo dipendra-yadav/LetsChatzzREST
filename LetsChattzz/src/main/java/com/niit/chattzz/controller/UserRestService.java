@@ -46,38 +46,40 @@ public class UserRestService {
 		}
 
 	}
-	
-	
-	   // login
-		@RequestMapping(value = "/login", method = RequestMethod.POST)
-		public ResponseEntity<?> login(@RequestBody User user, HttpSession session) {
 
-		
-			User validUser = udao.authenticate(user.getName(), user.getPassword());
-			if (validUser == null) {
-				//logger.debug("validUser is null");
-				Error error = new Error(1, "Username and password doesn't exists...");
-				return new ResponseEntity<Error>(error, HttpStatus.UNAUTHORIZED);
-			} 
-			else 
-			{
-				session.setAttribute("user", validUser);
+	// login
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public ResponseEntity<?> login(@RequestBody User user, HttpSession session) {
 
-				validUser.setIsOnline("true");
+		User validUser = udao.authenticate(user.getName(), user.getPassword());
+		if (validUser == null) {
+			// logger.debug("validUser is null");
+			Error error = new Error(1, "Username and password doesn't exists...");
+			return new ResponseEntity<Error>(error, HttpStatus.UNAUTHORIZED);
+		} else {
+			session.setAttribute("user", validUser);
 
-				udao.update(validUser);
+			validUser.setIsOnline("true");
 
-				//logger.debug("validUser is not null");
+			udao.update(validUser);
 
-				return new ResponseEntity<User>(validUser, HttpStatus.OK);
-			}
+			// logger.debug("validUser is not null");
 
-				
-			}
+			return new ResponseEntity<User>(validUser, HttpStatus.OK);
 		}
-	
-	
-	
-	
 
+	}
 
+	// logout
+	@RequestMapping(value = "/logout", method = RequestMethod.PUT)
+	public ResponseEntity<?> logout(HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		if (user != null) {
+			user.setIsOnline("false");
+			udao.update(user);
+		}
+		session.removeAttribute("user");
+		session.invalidate();
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+}
