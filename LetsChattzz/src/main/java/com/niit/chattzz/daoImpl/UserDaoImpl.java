@@ -36,7 +36,7 @@ public class UserDaoImpl implements UserDao {
 		try {
 
 			user.setRole("ROLE_USER");
-			user.setEnabled(true);
+			user.setEnabled("true");
 			sessionFactory.getCurrentSession().save(user);
 
 		} catch (HibernateException e) {
@@ -117,15 +117,20 @@ public class UserDaoImpl implements UserDao {
 
 	@Transactional
 	public User authenticate(String name, String password) {
-		String hql = "from User where name = " + "'" + name + "'and " + " password='" + password + "'";
+		System.out.println("authenticate hit*********");
+		String hql = "from User where name = " + "'" + name + "' and " + " password='" + password + "'";
 		@SuppressWarnings({ "rawtypes" })
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-
+                      sessionFactory.getCurrentSession().flush();
+                     
 		@SuppressWarnings("unchecked")
 		List<User> list = query.list();
+		System.out.println(list.toString());
 		if (list != null && !list.isEmpty()) {
+			System.out.println(list.get(0).toString());
 			return list.get(0);
 		}
+		 //sessionFactory.getCurrentSession().close();
 		return null;
 	}
 

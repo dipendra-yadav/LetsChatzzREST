@@ -36,7 +36,7 @@ public class UserTest {
 
 	@Test
 	public void createUserTestCase() {
-		user.setId(1);
+		/*user.setId(1);
 		user.setName("dipendra");
 		user.setEmail("dipendra.techie@gmail.com");
 
@@ -50,6 +50,6 @@ public class UserTest {
 
 		userDAO.save(user);
 		// Assert.assertEquals("createUserTestCase", true, flag);
-	}
+*/	}
 
 }
